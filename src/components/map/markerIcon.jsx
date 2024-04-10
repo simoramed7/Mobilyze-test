@@ -1,8 +1,8 @@
-import L from 'leaflet';
+import L from "leaflet";
 
 export const selectedIcon = L.icon({
-  iconUrl: 'add.png',
+  iconUrl: "add.png",
   iconSize: [46, 46],
-  iconAnchor: [16, 32], 
-  popupAnchor: [0, -32] 
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
 });

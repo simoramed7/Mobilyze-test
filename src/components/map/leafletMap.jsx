@@ -1,29 +1,32 @@
-import { useEffect, useState, useContext } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import {LeafletMarkers} from'./leafletMarkers'
-import { LocationsContext } from '../../context';
-import { selectedIcon } from './markerIcon';
+import { useEffect, useState, useContext } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { LeafletMarkers } from "./leafletMarkers";
+import { LocationsContext } from "../../context";
+import { selectedIcon } from "./markerIcon";
 
 export const MainMap = () => {
-  const {location, selectedLocation} = useContext(LocationsContext);
+  const { location, selectedLocation } = useContext(LocationsContext);
   const [locations, setLocations] = location;
-  const [selectedLocations, setSelectedLocations] = selectedLocation
+  const [selectedLocations, setSelectedLocations] = selectedLocation;
   const [position, setPosition] = useState([51.505, -0.09]);
   const [loadingError, setLoadingError] = useState(null);
 
   useEffect(() => {
     if (selectedLocations.length) {
-          setPosition(selectedLocations);
-        }
+      setPosition(selectedLocations);
+    }
   }, [selectedLocations]);
 
   const handleTileLoadError = (event) => {
-    setLoadingError('Error loading map tiles');
+    setLoadingError("Error loading map tiles");
   };
 
-
   return (
-    <MapContainer center={position} zoom={13} style={{ height: '100vh', width: '100%' }}>
+    <MapContainer
+      center={position}
+      zoom={13}
+      style={{ height: "100vh", width: "100%" }}
+    >
       {loadingError ? (
         <div>{loadingError}</div>
       ) : (
@@ -33,40 +36,30 @@ export const MainMap = () => {
           onLoadError={handleTileLoadError}
         />
       )}
-        <LeafletMarkers />
-        {locations?.map(location => (
+      <LeafletMarkers />
+      {locations?.map((location) => (
         <Marker
-        key={location.id}
-          position={[
-            location.lat,
-            location.lng
-          ]}
+          key={location.id}
+          position={[location.lat, location.lng]}
           onClick={() => {
             setSelectedLocations(location);
           }}
         >
-        <Popup>
-        Saved !
-      </Popup>
-      </Marker>
+          <Popup>Saved !</Popup>
+        </Marker>
       ))}
 
-      {selectedLocations?.map(location => (
+      {selectedLocations?.map((location) => (
         <Marker
-        key={location.id}
-          position={[
-            location.lat,
-            location.lng
-          ]}
+          key={location.id}
+          position={[location.lat, location.lng]}
           icon={selectedIcon}
           onClick={() => {
             setSelectedLocations(location);
           }}
         >
-        <Popup>
-        Please Click Add + to pin this location
-      </Popup>
-     </Marker> 
+          <Popup>Please Click Add + to pin this location</Popup>
+        </Marker>
       ))}
     </MapContainer>
   );
