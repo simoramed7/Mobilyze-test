@@ -4,6 +4,7 @@ import { LocationsContext } from "../../context";
 
 export const LeafletMarkers = () => {
   const { selectedLocation } = useContext(LocationsContext);
+  // eslint-disable-next-line no-unused-vars
   const [_, setSelectedLocations] = selectedLocation;
   const map = useMap();
   useEffect(() => {

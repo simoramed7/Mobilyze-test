@@ -26,6 +26,7 @@ export const App = () => {
     return () => {
       saveStateToLocalStorage(locations);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

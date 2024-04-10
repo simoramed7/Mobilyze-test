@@ -6,7 +6,7 @@ import { selectedIcon } from "./markerIcon";
 
 export const MainMap = () => {
   const { location, selectedLocation } = useContext(LocationsContext);
-  const [locations, setLocations] = location;
+  const [locations] = location;
   const [selectedLocations, setSelectedLocations] = selectedLocation;
   const [position, setPosition] = useState([51.505, -0.09]);
   const [loadingError, setLoadingError] = useState(null);
